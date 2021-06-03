@@ -29,8 +29,44 @@ class SimpleCalculator extends StatefulWidget {
 }
 
 class _SimpleCalculatorState extends State<SimpleCalculator> {
+  String equation="0";
+  String result="0";
+  String expression="";
+  double equationFontSize = 38.0;
+  double resultFontSize = 48.0;
+
+
   buttonPressed(String buttonText){
     print("clicked $buttonText");
+    setState(() {
+      switch(buttonText){
+        case "C":{
+          //clear out everything
+          result ="0";
+          equation = "0";
+        }
+        break;
+        case "⌫":{
+          //backspace
+          equation = equation.substring(0,equation.length - 1);
+          if(equation == ""){
+            equation = "0";
+          }
+        }
+        break;
+        case "=":{
+          //equal signs
+        }
+        break;
+        default:
+          ///normal equation
+          if(equation == "0"){
+            equation = buttonText;
+          }else{
+            equation = equation + buttonText;
+          }
+      }
+    });
   }
 
 
@@ -62,16 +98,16 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
             alignment: Alignment.centerRight,
             padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
             child: Text(
-              "0",
-              style: TextStyle(fontSize: 35.0),
+              "$equation",
+              style: TextStyle(fontSize: equationFontSize),
             ),
           ),
           Container(
             alignment: Alignment.centerRight,
             padding: EdgeInsets.fromLTRB(10, 30, 10, 0),
             child: Text(
-              "0",
-              style: TextStyle(fontSize: 45.0),
+              "$result",
+              style: TextStyle(fontSize: resultFontSize),
             ),
           ),
           Expanded(
