@@ -1,5 +1,5 @@
 # flutter_calculator
-
+![Alt Text](cal_video.gif)
 A new Flutter project.
 
 ## Getting Started
