@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'styles.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 void main() {
   runApp(MyApp());
@@ -62,6 +63,24 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           //equal signs
           equationFontSize = 38.0;
           resultFontSize = 48.0;
+          print("question $equation");
+          expression = equation;
+          expression = expression.replaceAll('x', '*');
+          expression = expression.replaceAll('÷', '/');
+
+
+          try{
+            Parser p = Parser();
+            Expression exp = p.parse(expression);
+
+            ContextModel cm = ContextModel();
+            result = '${exp.evaluate(EvaluationType.REAL,cm)}';
+            print("answer is $result");
+          }catch(e){
+            print("An error occurred");
+            result= "Error";
+          }
+
         }
         break;
         default:
@@ -132,7 +151,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
                     TableRow(children: [
                       buildButton("C", 1, Colors.redAccent),
                       buildButton("⌫", 1, Colors.blue),
-                      buildButton("+", 1, Colors.blue),
+                      buildButton("÷", 1, Colors.blue),
                     ]),
                     TableRow(children: [
                       buildButton("7", 1, Colors.black54),
@@ -163,7 +182,7 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
                   children: [
                     TableRow(
                       children: [
-                        buildButton("×", 1, Colors.blue),
+                        buildButton("x", 1, Colors.blue),
                       ],
                     ),
                     TableRow(
