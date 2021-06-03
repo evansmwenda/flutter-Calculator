@@ -44,10 +44,14 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
           //clear out everything
           result ="0";
           equation = "0";
+          equationFontSize = 38.0;
+          resultFontSize = 48.0;
         }
         break;
         case "⌫":{
           //backspace
+          equationFontSize = 48.0;
+          resultFontSize = 38.0;
           equation = equation.substring(0,equation.length - 1);
           if(equation == ""){
             equation = "0";
@@ -56,15 +60,20 @@ class _SimpleCalculatorState extends State<SimpleCalculator> {
         break;
         case "=":{
           //equal signs
+          equationFontSize = 38.0;
+          resultFontSize = 48.0;
         }
         break;
         default:
-          ///normal equation
+          //normal equation
+          equationFontSize = 48.0;
+          resultFontSize = 38.0;
           if(equation == "0"){
             equation = buttonText;
           }else{
             equation = equation + buttonText;
           }
+          break;
       }
     });
   }
